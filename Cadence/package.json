@@ -1,0 +1,16 @@
+{
+  "name": "cadence",
+  "version": "1.0.0",
+  "description": "1. **Working on the code from this folder**\r 2. Implement a function to solve a game need: **slot machine cadence**.\r 3. The capacity to understand written code and new tech. You can improve what is already written.\r 4. **Clean and commented code**. Feel free to comment the existing code - it will be useful in understanding how it works.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.4"
+  }
+}

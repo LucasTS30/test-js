@@ -80,9 +80,39 @@ const slotMachineCadences: RoundsCadences = { roundOne: [], roundTwo: [], roundT
  * @param symbols Array<SlotCoordinate> positions of the special symbols. Example: [{ column: 0, row: 2 }, { column: 2, row: 3 }]
  * @returns SlotCadence Array of numbers representing the slot machine stop cadence.
  */
-function slotCadence(symbols: Array<SlotCoordinate>): SlotCadence {
-  // Magic
-  return [];
+function slotCadence(specialSymbols: Array<SlotCoordinate>): SlotCadence {
+  let countSpecialSymbol = 0;
+  let lastPositionSpecialSymbol = 0;
+  let arrayColumnsCadence = Array<number>(anticipatorConfig.columnSize).fill(0);
+
+  for(let i = 0; i < arrayColumnsCadence.length; i++){
+    for(let coordinate of specialSymbols) {
+      if(coordinate.column === i){
+        countSpecialSymbol++;
+        lastPositionSpecialSymbol = coordinate.column;
+      }
+    }
+    if (countSpecialSymbol == anticipatorConfig.minToAnticipate && countSpecialSymbol != anticipatorConfig.maxToAnticipate) {
+      if(i === 0){
+        continue;
+      }
+      else if(i == (arrayColumnsCadence.length - 1) && i === lastPositionSpecialSymbol) {
+        arrayColumnsCadence[i] = arrayColumnsCadence[i - 1] + anticipatorConfig.defaultCadence;
+      }
+      else {
+        arrayColumnsCadence[i] = arrayColumnsCadence[i - 1] + anticipatorConfig.anticipateCadence;
+      }
+    }
+    else{
+      if(i === 0){
+        continue;
+      }
+      else {
+        arrayColumnsCadence[i] = arrayColumnsCadence[i - 1] + anticipatorConfig.defaultCadence;
+      }
+    } 
+  }
+  return arrayColumnsCadence;
 }
 
 /**
