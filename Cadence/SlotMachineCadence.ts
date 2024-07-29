@@ -85,14 +85,14 @@ function slotCadence(specialSymbols: Array<SlotCoordinate>): SlotCadence {
   let lastPositionSpecialSymbol = 0;
   let arrayColumnsCadence = Array<number>(anticipatorConfig.columnSize).fill(0);
 
-  for(let i = 0; i < arrayColumnsCadence.length; i++){
-    for(let coordinate of specialSymbols) {
-      if(coordinate.column === i){
+  for(let i = 0; i < arrayColumnsCadence.length; i++){ //loop through the created array based on anticipatorConfig
+    for(let coordinate of specialSymbols) { //and loop through the specialSymbols array
+      if(coordinate.column === i){ //if the special symbol coordinate is equal to the current position, increment coutSpecialSymbol and keeps the position
         countSpecialSymbol++;
         lastPositionSpecialSymbol = coordinate.column;
       }
     }
-    if (countSpecialSymbol == anticipatorConfig.minToAnticipate && countSpecialSymbol != anticipatorConfig.maxToAnticipate) {
+    if (countSpecialSymbol == anticipatorConfig.minToAnticipate && countSpecialSymbol != anticipatorConfig.maxToAnticipate) { //from here will verify if the positions are between the minToAnticipate and maxToAnticipate to receive the default cadence or anticipate cadence
       if(i === 0){
         continue;
       }
